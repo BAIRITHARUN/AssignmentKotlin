@@ -77,6 +77,7 @@ class MainFragFragment : Fragment(), IMainFragView {
 
     /*method for updating action bar title*/
     override fun setActionBarTitle(title: String) {
+        if (this.activity!=null)
         (this.activity as MainActivity).supportActionBar?.setTitle(title)
     }
 
@@ -107,6 +108,7 @@ class MainFragFragment : Fragment(), IMainFragView {
 
     /*method for showing toast message*/
     override fun showToast(message: String) {
+        if (this.activity!=null)
         Toast.makeText(this.activity, message, Toast.LENGTH_SHORT).show()
     }
 
@@ -120,8 +122,11 @@ class MainFragFragment : Fragment(), IMainFragView {
             }
 
             override fun doInBackground(vararg voids: Void): List<RoomEntity> {
+                if (activity!=null)
                 return TitlesRoomDatabase
                     .getInstance(activity!!.applicationContext).titlesDao().titlesList
+                else
+                    return emptyList()
             }
 
             override fun onPostExecute(tasks: List<RoomEntity>) {
@@ -145,6 +150,7 @@ class MainFragFragment : Fragment(), IMainFragView {
                 super.onPreExecute()
             }
             override fun doInBackground(vararg params: Void?): Void? {
+                if (activity!=null)
                 TitlesRoomDatabase.getInstance(activity!!.applicationContext).titlesDao()
                     .insertListOfUsers(roomEntityList.requireNoNulls())
                 return null
@@ -169,6 +175,7 @@ class MainFragFragment : Fragment(), IMainFragView {
             }
 
             override fun doInBackground(vararg params: Void?): Void? {
+                if (activity!=null)
                 TitlesRoomDatabase.getInstance(activity!!.applicationContext).titlesDao()
                     .deleteTitle()
                 return null

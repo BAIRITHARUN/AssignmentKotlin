@@ -4,7 +4,7 @@ package com.infy.assignmentkotlin.main_activity.view.activity
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.LargeTest
@@ -29,12 +29,12 @@ class MainActivityTest {
 
     @Test
     fun mainActivityTest() {
-        val relativeLayout = onView(
+        val frameLayout = onView(
             allOf(
-                withId(R.id.mRelListItem),
+                withId(R.id.mFLMain),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.mRcvTitlesList),
+                        withId(android.R.id.content),
                         0
                     ),
                     0
@@ -42,22 +42,7 @@ class MainActivityTest {
                 isDisplayed()
             )
         )
-        relativeLayout.perform(click())
-
-        val relativeLayout2 = onView(
-            allOf(
-                withId(R.id.mRelListItem),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.mRcvTitlesList),
-                        1
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        relativeLayout2.perform(click())
+        frameLayout.check(matches(isDisplayed()))
     }
 
     private fun childAtPosition(
